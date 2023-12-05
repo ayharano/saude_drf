@@ -30,6 +30,13 @@ RUN pip install --no-cache-dir --upgrade pip build setuptools \
     && pip install --no-cache-dir --upgrade tzdata
 
 
+FROM base as migrations
+
+WORKDIR ${APP_HOME}/saude_drf
+
+CMD ["python", "manage.py", "migrate", "--noinput"]
+
+
 FROM base as web
 
 WORKDIR ${APP_HOME}/saude_drf

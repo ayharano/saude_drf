@@ -20,6 +20,19 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+  migrations:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: migrations
+    command: python manage.py migrate --noinput
+    environment:
+      DATABASE_URL: postgres://postgres:postgrespw@database:5432/saudedrfdb
+    volumes:
+      - ./src:/app/saude_drf
+    depends_on:
+      database:
+        condition: service_healthy
   web:
     container_name: saude_drf
     build:
@@ -37,3 +50,5 @@ services:
     depends_on:
       database:
         condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
