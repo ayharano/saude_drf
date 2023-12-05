@@ -4,6 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "saude-drf"
+dynamic = ["version"]
 authors = [
   { name="Alexandre Harano", email="email@ayharano.dev" },
 ]
@@ -23,3 +24,6 @@ dependencies = [
 [project.urls]
 "Homepage" = "https://github.com/ayharano/saude-drf"
 "Bug Tracker" = "https://github.com/ayharano/saude-drf/issues"
+
+[tool.setuptools.dynamic]
+version = {file = "saude_drf/VERSION"}
