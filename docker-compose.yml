@@ -1,0 +1,39 @@
+volumes:
+  postgresql-data:
+
+services:
+  database:
+    image: postgres:16
+    restart: always
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: saudedrfdb
+      POSTGRES_PASSWORD: postgrespw
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  web:
+    container_name: saude_drf
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: web
+    command: python manage.py runserver 0.0.0.0:3000
+    environment:
+      DATABASE_URL: postgres://postgres:postgrespw@database:5432/saudedrfdb
+      DEBUG: 1
+    volumes:
+      - ./src:/app/saude_drf
+    ports:
+      - "3000:3000"
+    depends_on:
+      database:
+        condition: service_healthy
