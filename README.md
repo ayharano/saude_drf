@@ -8,6 +8,7 @@ Repositório de [Alexandre Harano](mailto:email@ayharano.dev)
 - [Python](https://www.python.org/) 3.11+
 - [Django](https://www.djangoproject.com/) 4.2 LTS
 - [Django REST framework](https://www.django-rest-framework.org/) 3.14
+- [django-model-utils](https://github.com/jazzband/django-model-utils) 4.3
 
 ### Dependências Relacionadas a Banco Relacional
 
