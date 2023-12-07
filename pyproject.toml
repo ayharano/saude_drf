@@ -28,5 +28,10 @@ dependencies = [
 "Homepage" = "https://github.com/ayharano/saude-drf"
 "Bug Tracker" = "https://github.com/ayharano/saude-drf/issues"
 
+[project.optional-dependencies]
+test = [
+    "factory-boy >=3.3.0,<3.4",
+]
+
 [tool.setuptools.dynamic]
 version = {file = "saude_drf/VERSION"}
