@@ -1,0 +1,38 @@
+FROM python:3.11-slim as base
+
+ENV APP_HOME /app
+WORKDIR ${APP_HOME}
+
+ENV PYTHONUNBUFFERED 1
+ENV VIRTUAL_ENV=/opt/venv
+
+ARG USER=default
+ENV HOME /home/${USER}
+
+RUN apt-get update && apt-get install -y sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# add new user
+RUN adduser --disabled-password --gecos "" ${USER} \
+    && echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} \
+    && chmod 0440 /etc/sudoers.d/${USER} \
+    && mkdir ${VIRTUAL_ENV} \
+    && chown ${USER}:${USER} ${APP_HOME} ${VIRTUAL_ENV}
+
+USER ${USER}
+
+RUN python3 -m venv ${VIRTUAL_ENV}
+ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
+
+COPY pyproject.toml .
+RUN pip install --no-cache-dir --upgrade pip build setuptools \
+    && pip install --no-cache-dir --editable . \
+    && pip install --no-cache-dir --upgrade tzdata
+
+
+FROM base as web
+
+WORKDIR ${APP_HOME}/saude_drf
+
+EXPOSE 3000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:3000"]
