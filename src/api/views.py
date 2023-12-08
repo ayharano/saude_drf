@@ -2,6 +2,7 @@ from django.db import IntegrityError, transaction
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 
+from api.filtersets import AppointmentsFilterSet
 from api.models import Appointment, HealthCareWorker
 from api.serializers import AppointmentSerializer, HealthCareWorkerSerializer
 
@@ -41,3 +42,4 @@ class AppointmentsViewSet(ListAsDictModelMixin, viewsets.ModelViewSet):
     serializer_class = AppointmentSerializer
     lookup_field = 'uuid'
     lookup_value_converter = 'uuid'
+    filterset_class = AppointmentsFilterSet

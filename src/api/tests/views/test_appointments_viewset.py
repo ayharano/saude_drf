@@ -9,7 +9,7 @@ from api.constants import (
     UNIQUE_APPOINTMENT_DATE_HEALTH_CARE_WORKER_ERROR_MESSAGE,
 )
 from api.models import Appointment
-from api.tests.models.factories import AppointmentFactory
+from api.tests.models.factories import AppointmentFactory, HealthCareWorkerFactory
 
 
 INITIAL_APPOINTMENTS_COUNT = 3
@@ -101,6 +101,27 @@ class AppointmentsViewSetTestCase(APITestCase):
         self.assertEqual(response.headers[CONTENT_TYPE], APPLICATION_JSON)
         self.assertEqual(list(response_data), ['data'])
         self.assertEqual(len(response_data['data']), len(self.existing_appointments))
+
+    def test_list_appointments_filtered_by_profissional_uuid(self):
+        new_hcw = HealthCareWorkerFactory()
+        # Create 3 appointments for the new Health Care Worker
+        AppointmentFactory.create_batch(3, health_care_worker=new_hcw)
+
+        url = reverse("api:appointments-list")
+        response = self.client.get(
+            url,
+            data={
+                'profissional_uuid': str(new_hcw.uuid),
+            },
+            format='json',
+        )
+        response_data = response.json()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers[CONTENT_TYPE], APPLICATION_JSON)
+        self.assertEqual(list(response_data), ['data'])
+        self.assertEqual(len(response_data['data']), 3)
+        self.assertGreater(Appointment.objects.count(), 3)
 
     def test_detail_appointment(self):
         chosen_instance = self.existing_appointments[INITIAL_APPOINTMENTS_COUNT-1]
