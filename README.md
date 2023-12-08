@@ -94,6 +94,10 @@ $ docker compose run web python manage.py test
 - [psycopg](https://www.psycopg.org/) 3.1
 - [dj-database-url](https://github.com/jazzband/dj-database-url) 2.1
 
+### Dependências Relacionadas a Geração de Schema OpenAPI
+
+- [drf-spectacular](https://github.com/tfranzel/drf-spectacular) 0.26
+
 ### Dependências Relacionadas a Testes
 
 - [factory_boy](https://github.com/FactoryBoy/factory_boy) 3.3
