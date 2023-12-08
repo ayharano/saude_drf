@@ -1,1 +1,2 @@
+from .appointment import AppointmentSerializer
 from .health_care_worker import HealthCareWorkerSerializer
