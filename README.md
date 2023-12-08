@@ -105,3 +105,4 @@ $ docker compose run web python manage.py test
 ## Material de referência
 
 - [Docker Compose for Django development](https://til.simonwillison.net/docker/docker-compose-for-django-development): base para o uso de Docker Compose com Django
+- [How to (and how not to) design REST APIs](https://github.com/stickfigure/blog/wiki/How-to-(and-how-not-to)-design-REST-APIs): artigo de opinião sobre design de APIs RESTful

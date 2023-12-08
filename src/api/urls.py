@@ -1,11 +1,16 @@
 from rest_framework import routers
 
+from api.views import HealthCareWorkersViewSet
+
 
 app_name = 'api'
 
 
 router = routers.DefaultRouter(
     trailing_slash=False,
+)
+router.register(
+    'profissionais', HealthCareWorkersViewSet, basename='health-care-workers',
 )
 
 
