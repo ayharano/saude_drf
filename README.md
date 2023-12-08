@@ -114,6 +114,10 @@ para rodar o projeto Django com o banco de dados PostgreSQL.
 
 O container da aplicação possui um usuário não-root na distribuição Debian e é usado um ambiente virtual de Python 3.11. Desta forma, não é necessária a instalação de um ambiente virtual local.
 
+Demonstrativo de clonando o repositório até subir o container da aplicação:
+
+[![Aplicação rodando](https://asciinema.org/a/skGiq1H6rrSM1mjQEaC6SqriE.png)](https://asciinema.org/a/skGiq1H6rrSM1mjQEaC6SqriE)
+
 ### Instalação em ambiente virtual local
 
 Como mencionado anteriormente, não há a necessidade da instalação de ambiente virtual local. Mas caso essa forma seja preferida, recomendamos o uso de pyenv para gerir múltiplas versões de interpretadores Python.
@@ -179,6 +183,10 @@ Uma vez que o projeto esteja devidamente instalado, use o seguinte comando para 
 ```shell
 $ docker compose run web python manage.py test
 ```
+
+Demonstrativo de rodando os testes da aplicação:
+
+[![Testes](https://asciinema.org/a/EFZH6EAx563iSWSCiaavDHtP2.png)](https://asciinema.org/a/EFZH6EAx563iSWSCiaavDHtP2)
 
 ## Uso do Projeto
 
