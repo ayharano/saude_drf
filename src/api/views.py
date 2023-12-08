@@ -1,8 +1,9 @@
-from rest_framework import viewsets
+from django.db import IntegrityError, transaction
+from rest_framework import status, viewsets
 from rest_framework.response import Response
 
-from api.models import HealthCareWorker
-from api.serializers import HealthCareWorkerSerializer
+from api.models import Appointment, HealthCareWorker
+from api.serializers import AppointmentSerializer, HealthCareWorkerSerializer
 
 
 class ListAsDictModelMixin:
@@ -31,5 +32,12 @@ class ListAsDictModelMixin:
 class HealthCareWorkersViewSet(ListAsDictModelMixin, viewsets.ModelViewSet):
     queryset = HealthCareWorker.objects.all()
     serializer_class = HealthCareWorkerSerializer
+    lookup_field = 'uuid'
+    lookup_value_converter = 'uuid'
+
+
+class AppointmentsViewSet(ListAsDictModelMixin, viewsets.ModelViewSet):
+    queryset = Appointment.objects.all()
+    serializer_class = AppointmentSerializer
     lookup_field = 'uuid'
     lookup_value_converter = 'uuid'
