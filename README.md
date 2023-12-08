@@ -87,6 +87,7 @@ $ docker compose run web python manage.py test
 - [Django](https://www.djangoproject.com/) 4.2 LTS
 - [Django REST framework](https://www.django-rest-framework.org/) 3.14
 - [django-model-utils](https://github.com/jazzband/django-model-utils) 4.3
+- [django-filter](https://github.com/carltongibson/django-filter) 23.5
 
 ### Dependências Relacionadas a Banco Relacional
 
