@@ -26,7 +26,7 @@ ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
 
 COPY pyproject.toml .
 RUN pip install --no-cache-dir --upgrade pip build setuptools \
-    && pip install --no-cache-dir --editable . \
+    && pip install --no-cache-dir --editable '.[test]' \
     && pip install --no-cache-dir --upgrade tzdata
 
 

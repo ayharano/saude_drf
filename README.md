@@ -63,12 +63,12 @@ ambientevirtual\Scripts\Activate.ps1
 Uma vez que o ambiente virtual esteja ativado, rode o seguinte comando:
 
 ```shell
-python -m pip install --upgrade pip && python -m pip install --editable . && python -m pip install --upgrade tzdata
+python -m pip install --upgrade pip && python -m pip install --editable '.[test]' && python -m pip install --upgrade tzdata
 ```
 
 Esse comando é uma cadeia de 3 chamadas consistindo em
 1. atualização de `pip` para sua versão mais recente
-2. instalação de todas as dependências do projeto e a definição do projeto atual como [uma dependência editável](https://setuptools.pypa.io/en/latest/userguide/development_mode.html), e
+2. instalação de todas as dependências do projeto, incluindo as de testes, e a definição do projeto atual como [uma dependência editável](https://setuptools.pypa.io/en/latest/userguide/development_mode.html), e
 3. garante a instalação do pacote `tzdata`, que é usada pelo Python para gerir informações de timezone sem depender do sistema operacional, em sua última versão estável (explicação na [documentação do módulo `zoneinfo`](https://docs.python.org/3/library/zoneinfo.html))
 
 Após a instalação das dependências, para qualquer interação com o projeto Django, é necessário que o terminal esteja no diretório `src` visto que o arquivo `manage.py` encontra-se lá.
@@ -92,6 +92,10 @@ $ docker compose run web python manage.py test
 
 - [psycopg](https://www.psycopg.org/) 3.1
 - [dj-database-url](https://github.com/jazzband/dj-database-url) 2.1
+
+### Dependências Relacionadas a Testes
+
+- [factory_boy](https://github.com/FactoryBoy/factory_boy) 3.3
 
 ## Dependências da Solução Integrada
 
